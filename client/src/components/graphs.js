@@ -9,6 +9,7 @@ class Graphs extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showPiano: false,
       rerender: false,
       pianoArray: [],
       exercise: {
@@ -24,6 +25,22 @@ class Graphs extends Component {
     };
     // this.x = this.x.bind(this)
   }
+
+  componentWillMount() {
+    var self = this;
+    navigator.requestMIDIAccess().then(midiAccess => {
+      if (midiAccess.inputs.size > 0) {
+        self.setState({
+          showPiano: false
+        });
+      } else {
+        self.setState({
+          showPiano: true
+        });
+      }
+    });
+  }
+
   x = y => {
     this.setState({
       pianoArray: y
@@ -108,32 +125,91 @@ class Graphs extends Component {
     );
   };
   render() {
-    return (
-      <div>
-        {this.state.flag ? (
-          <div>
-            success: {this.state.pianoArray.toString()}
-            {/* NOTE=if this.state.rerender(flag) render agains ; the change of state changes the flag*/}
-            {/* {this.state.rerender ? this.doHi() : <div>nope</div>} */}
-            {/* {this.doHi()} */}
-            <Abcjs
-              abcNotation={
-                //X: 1 stave T: title of rendered staff C: composer K: key(G in this case) "|": bar line
-                this.state.abcjs
-                // this.state.abc
-              }
-              parserParams={{}}
-              engraverParams={{ responsive: "resize" }}
-              renderParams={{ viewportHorizontal: true }}
-            />
-          </div>
-        ) : (
-          <p>failure</p>
-        )}
-        <Piano pianoArray={this.state.pianoArray} x={this.x} />
-        <Midi pianoArray={this.state.pianoArray} x={this.x} />
-      </div>
-    );
+    // return (
+    //   <div>
+    //     {this.state.flag ? (
+    //       <div>
+    //         success: {this.state.pianoArray.toString()}
+    //         {/* NOTE=if this.state.rerender(flag) render agains ; the change of state changes the flag*/}
+    //         {/* {this.state.rerender ? this.doHi() : <div>nope</div>} */}
+    //         {/* {this.doHi()} */}
+    //         <Abcjs
+    //           abcNotation={
+    //             //X: 1 stave T: title of rendered staff C: composer K: key(G in this case) "|": bar line
+    //             this.state.abcjs
+    //             // this.state.abc
+    //           }
+    //           parserParams={{}}
+    //           engraverParams={{ responsive: "resize" }}
+    //           renderParams={{ viewportHorizontal: true }}
+    //         />
+    //       </div>
+    //     ) : (
+    //       <p>failure</p>
+    //     )}
+
+    //     <Piano pianoArray={this.state.pianoArray} x={this.x} />
+    //     <Midi pianoArray={this.state.pianoArray} x={this.x} />
+    //   </div>
+    // );
+
+    if (this.state.showPiano) {
+      return (
+        <div>
+          <a href="/home">Dashboard</a>
+          <h1>EXERCISE</h1>
+          {this.state.flag ? (
+            <div>
+              success: {this.state.pianoArray.toString()}
+              {/* NOTE=if this.state.rerender(flag) render agains ; the change of state changes the flag*/}
+              {/* {this.state.rerender ? this.doHi() : <div>nope</div>} */}
+              {/* {this.doHi()} */}
+              <Abcjs
+                abcNotation={
+                  //X: 1 stave T: title of rendered staff C: composer K: key(G in this case) "|": bar line
+                  this.state.abcjs
+                  // this.state.abc
+                }
+                parserParams={{}}
+                engraverParams={{ responsive: "resize" }}
+                renderParams={{ viewportHorizontal: true }}
+              />
+            </div>
+          ) : (
+            <p>failure</p>
+          )}
+          <Piano pianoArray={this.state.pianoArray} x={this.x} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <a href="/home">Dashboard</a>
+          <h1>EXERCISE</h1>
+          {this.state.flag ? (
+            <div>
+              success: {this.state.pianoArray.toString()}
+              {/* NOTE=if this.state.rerender(flag) render agains ; the change of state changes the flag*/}
+              {/* {this.state.rerender ? this.doHi() : <div>nope</div>} */}
+              {/* {this.doHi()} */}
+              <Abcjs
+                abcNotation={
+                  //X: 1 stave T: title of rendered staff C: composer K: key(G in this case) "|": bar line
+                  this.state.abcjs
+                  // this.state.abc
+                }
+                parserParams={{}}
+                engraverParams={{ responsive: "resize" }}
+                renderParams={{ viewportHorizontal: true }}
+              />
+            </div>
+          ) : (
+            <p>failure</p>
+          )}
+          <Midi pianoArray={this.state.pianoArray} x={this.x} />
+        </div>
+      );
+    }
   }
 }
 export default Graphs;

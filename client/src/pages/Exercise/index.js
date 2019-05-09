@@ -15,48 +15,31 @@ import "./style.css";
 // }
 
 class Exercise extends Component {
-  state = {
-    showPiano: false
-  };
-  componentWillMount() {
-    var self = this;
-    navigator.requestMIDIAccess().then(midiAccess => {
-      if (midiAccess.inputs.size > 0) {
-        self.setState({
-          showPiano: false
-        });
-      } else {
-        self.setState({
-          showPiano: true
-        });
-      }
-    });
-  }
-
   render() {
     console.log(this.state);
-
-    if (this.state.showPiano) {
-      return (
-        <div>
-          <a href="/home">Dashboard</a>
-          <h1>EXERCISE</h1>
-          <Graphs />
-          {/* <Piano /> */}
-          {/* <Midi /> */}
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <a href="/home">Dashboard</a>
-          <h1>EXERCISE</h1>
-          <Graphs />
-          {/* <Midi /> */}
-        </div>
-      );
-    }
+    return <Graphs />;
   }
+  //   if (this.state.showPiano) {
+  //     return (
+  //       <div>
+  //         <a href="/home">Dashboard</a>
+  //         <h1>EXERCISE</h1>
+  //         {/* <Graphs /> */}
+  //         {/* <Piano /> */}
+  //         {/* <Midi /> */}
+  //       </div>
+  //     );
+  //   } else {
+  //     return (
+  //       <div>
+  //         <a href="/home">Dashboard</a>
+  //         <h1>EXERCISE</h1>
+  //         {/* <Graphs /> */}
+  //         {/* <Midi /> */}
+  //       </div>
+  //     );
+  //   }
+  // }
 }
 
 export default Exercise;

@@ -275,7 +275,8 @@ class Midi extends Component {
         <div>Midi connected? {this.state.isConnected.toString()}</div>
         <div>Notes: {this.state.MidiValArray}</div>
 
-        {/* Set Title, Composer, and Key of exercise */}
+        {/* FUTURE USER CUSTOMIZATION DO NOT ERASE */}
+        {/* Set Title, Composer, and Key of exercise
         <div className="container userStaffInput">
           <h2>Start Exercise</h2>
           <form onSubmit={this.handleSubmit}>
@@ -306,7 +307,7 @@ class Midi extends Component {
             />
             <input type="submit" />
           </form>
-        </div>
+        </div> */}
 
         {/* FUTURE INLINE MIDI */}
         {/* <div id="midi" />
