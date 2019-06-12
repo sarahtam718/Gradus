@@ -1,5 +1,5 @@
 # Gradus 0.1.0 Rollout
-
+deployed link: https://pacific-cove-65892.herokuapp.com/  (loads in less than one minute)
 ---
 
 Gradus is a music composition software run entirely within the browser (just Chrome for now, cross-browser functionality planned for 1.0.0 release). The app comes ready to be deployed for both personal use and to clients.
